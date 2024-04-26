@@ -1,0 +1,3 @@
+sentence_transformers
+langchain
+langchain_openai
