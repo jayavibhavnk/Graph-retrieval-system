@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='Graph Retrieval System',
+    name='graph_retrieval_system',
     version='0.1',
     description='Graph retrieval',
     long_description='Graph retrieval',
