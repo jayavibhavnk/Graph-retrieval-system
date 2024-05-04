@@ -51,7 +51,7 @@ class GraphRAG():
     def create_graph_from_file(self, file, similarity_threshold = 0):
         file = open(file, 'r')
         text_data = file.read()
-        self.graph, self.lines, self.embeddings = create_graph_from_text(text_data, similarity_threshold = similarity_threshold)
+        self.graph, self.lines, self.embeddings = self.constructGraph(text_data, similarity_threshold = similarity_threshold)
         print("Graph created Successfully!")
     
     def compute_similarity(self, current_node, graph, lines, query_embedding):
