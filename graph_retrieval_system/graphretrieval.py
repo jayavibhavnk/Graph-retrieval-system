@@ -119,7 +119,7 @@ class GraphRAG():
     def query_openai(self, query):
         client = OpenAI()
         completion = client.chat.completions.create(
-        model="gpt-4-0125-preview",
+        model="gpt-3.5-turbo-0125",
         messages=[
             {"role": "system", "content": "You are a helpful assistant"},
             {"role": "user", "content": query}
