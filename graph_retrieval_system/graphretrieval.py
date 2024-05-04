@@ -57,7 +57,7 @@ class GraphRAG():
     def compute_similarity(self, current_node, graph, lines, query_embedding):
         similar_nodes = []
         for neighbor in graph.neighbors(current_node):
-            neighbor_embedding = embeddings[neighbor]
+            neighbor_embedding = self.embeddings[neighbor]
             neighbor_similarity = cosine_similarity([query_embedding], [neighbor_embedding])[0][0]
             similar_nodes.append((neighbor, neighbor_similarity))
         return similar_nodes
