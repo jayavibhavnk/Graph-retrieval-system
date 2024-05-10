@@ -5,6 +5,7 @@ import heapq
 from joblib import Parallel, delayed
 from langchain_text_splitters import CharacterTextSplitter
 from openai import OpenAI
+import pickle
 
 class GraphRAG():
     def __init__(self):
@@ -12,11 +13,11 @@ class GraphRAG():
         self.lines = None
         self.embeddings = None
     
-    def constructGraph(self, text, similarity_threshold=0):
+    def constructGraph(self, text, similarity_threshold=0, chunk_size = 1250, chunk_overlap = 100):
         text_splitter = CharacterTextSplitter(
         separator="\n\n",
-        chunk_size=1000,
-        chunk_overlap=200,
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
         length_function=len,
         is_separator_regex=False,
         )
@@ -128,6 +129,16 @@ class GraphRAG():
         )
         return(completion.choices[0].message.content)
 
+    def save_db(self, file_path):
+        with open(file_path, 'wb') as file:
+            pickle.dump((self.graph, self.lines, self.embeddings), file)
+            print("saved!")
+    
+    def load_db(self, file_path):
+        with open(file_path, 'rb') as file:
+            self.graph, self.lines, self.embeddings = pickle.load(file)
+            print("loaded!")
+
 
 class KnowledgeRAG():
     def __init__(self):
@@ -145,4 +156,3 @@ class KnowledgeRAG():
 class GraphRetrieval(GraphRAG, KnowledgeRAG):
     def __init__():
         pass
-
